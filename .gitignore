@@ -1,0 +1,8 @@
+Include/
+pyvenv.cfg
+Lib/
+Scripts/
+Include/
+.env
+db.sqlite3
+credentials.txt
