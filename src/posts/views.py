@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+def AllArticles(request, *args, **kwargs):
+    template = "global.html"
+    context = {
+
+    }
+
+    return render(request, template, context)
