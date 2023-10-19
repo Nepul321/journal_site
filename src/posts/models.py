@@ -2,6 +2,7 @@ from django.db import models
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
+    image_url = models.URLField(default="")
     date = models.DateField(auto_now_add=True)
     datetime = models.DateTimeField(auto_now_add=True)
     content = models.TextField(blank=False)
