@@ -1,22 +1,43 @@
-{% extends 'base.html' %}
-
-{% block title %}
-
-Free Thought - All articles
-
-{% endblock title %}
+{% extends 'base.html' %} 
+{% block title %} 
+Free Thought - All articles 
+{% endblock title %} 
 
 {% block css %}
+<style>
 
-{% endblock css %}
+  .card {
+    margin-bottom: 2rem;
+  }
+
+
+
+</style>
+{% endblock css %} 
 
 {% block content %}
 <div class="container-fluid my-4">
-    <h1>All articles</h1>
-    <hr />
-</div>
-{% endblock content %}
-
-{% block js %}
-
-{% endblock js %}
+  <h1>All articles</h1>
+  <hr />
+  <div class="container mx-auto mt-4">
+    {% for i in qs %} 
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card" style="width: 24rem">
+          <img
+            src="https://i.imgur.com/ZTkt4I5.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ i.title }}</h5>
+            <a href="" class="btn btn-outline-primary"
+              ><i class="fas fa-link"></i> View article</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock content %} {% block js %} {% endblock js %}
