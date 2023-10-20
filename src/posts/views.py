@@ -12,9 +12,9 @@ def AllArticles(request, *args, **kwargs):
     return render(request, template, context)
 
 
-def ArticleDetails(request, id, *args, **kwargs):
+def ArticleDetails(request, slug, *args, **kwargs):
     template = "article_detail.html"
-    qs = Post.objects.filter(id=id)
+    qs = Post.objects.filter(slug=slug)
 
     obj = qs.first()
     context = {
