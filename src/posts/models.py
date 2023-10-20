@@ -1,8 +1,19 @@
 from django.db import models
+from django.utils.text import slugify
+from django.utils.crypto import get_random_string
+
+def unique_slugify(instance, slug):
+    model = instance.__class__
+    unique_slug = slug
+    while model.objects.filter(slug=unique_slug).exists():
+        unique_slug = slug + "-" + get_random_string(length=4)
+    return unique_slug
+
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
     image_url = models.URLField(default="")
+    slug = models.SlugField(unique=True, blank=True)
     date = models.DateField(auto_now_add=True)
     datetime = models.DateTimeField(auto_now_add=True)
     content = models.TextField(blank=False)
@@ -13,3 +24,8 @@ class Post(models.Model):
 
     def __str__(self):
         return str(self.id)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = unique_slugify(self, slugify(self.title))
+        super().save(*args, **kwargs)
