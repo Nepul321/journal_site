@@ -10,3 +10,15 @@ def AllArticles(request, *args, **kwargs):
     }
 
     return render(request, template, context)
+
+
+def ArticleDetails(request, id, *args, **kwargs):
+    template = "article_detail.html"
+    qs = Post.objects.filter(id=id)
+
+    obj = qs.first()
+    context = {
+      'obj' : obj,
+    }
+
+    return render(request, template, context)

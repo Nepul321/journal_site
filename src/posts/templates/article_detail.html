@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ obj.title }}
+{% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+<div class="container-fluid my-4">
+<div class="container">
+    <h1>{{ obj.title }}</h1>
+    <img src="{{ obj.image_url }}" style="width: 80%;" />
+</div>
+<hr />
+<div class="container">
+    <p>{{ obj.content|safe }}</p>
+</div>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}
