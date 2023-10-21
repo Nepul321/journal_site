@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create Article
+{% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+<div class="container-fluid my-4">
+<h1>Write a new article</h1>
+<hr />
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-outline-primary">Publish</button>
+</form>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

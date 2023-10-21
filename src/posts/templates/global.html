@@ -20,8 +20,8 @@ Free Thought - All articles
   <h1>All articles</h1>
   <hr />
   <div class="container mx-auto mt-4">
-    {% for i in qs %} 
     <div class="row">
+    {% for i in qs %} 
       <div class="col-md-4">
         <div class="card" style="width: 24rem">
           <img
@@ -38,7 +38,7 @@ Free Thought - All articles
           </div>
         </div>
       </div>
-    </div>
     {% endfor %}
+  </div>
   </div>
 {% endblock content %} {% block js %} {% endblock js %}
