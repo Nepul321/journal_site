@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'base',
     'posts',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -144,6 +145,8 @@ REST_FRAMEWORK = {
    "DEFAULT_AUTHENTICATION_CLASSES" : DEFAULT_AUTHENTICATION_CLASSES,
    "DEFAULT_RENDERER_CLASSES" : DEFAULT_RENDERER_CLASSES
 }
+
+AUTH_USER_MODEL = "users.CustomUser"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
