@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
+from users.models import CustomUser
 
 def unique_slugify(instance, slug):
     model = instance.__class__
@@ -15,6 +16,7 @@ class Post(models.Model):
     image_url = models.URLField(default="")
     slug = models.SlugField(unique=True, blank=True)
     date = models.DateField(auto_now_add=True)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
     content = models.TextField(blank=False)
     citations = models.TextField(blank=True)
