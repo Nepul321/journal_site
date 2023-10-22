@@ -2,13 +2,18 @@ from django.shortcuts import render, redirect
 from .models import Post
 from users.decorators import superuseronly
 from .forms import PostCreateForm
+from django.core.paginator import Paginator
 
 def AllArticles(request, *args, **kwargs):
     template = "global.html"
-    qs = Post.objects.all()
-
+    stuff = Post.objects.all()
+    p = Paginator(stuff, 15)
+    page = request.GET.get('page')
+    qs = p.get_page(page)
+    nums = "a" * qs.paginator.num_pages
     context = {
       'qs' : qs,
+      'nums' : nums
     }
 
     return render(request, template, context)
@@ -17,6 +22,9 @@ def AllArticles(request, *args, **kwargs):
 def ArticleDetails(request, slug, *args, **kwargs):
     template = "article_detail.html"
     qs = Post.objects.filter(slug=slug)
+
+    if not qs:
+        return redirect('/all/')
 
     obj = qs.first()
     context = {
