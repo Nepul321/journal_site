@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Free Thought - Login
+{% endblock title %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block content %}
+<div class="container-fluid my-4">
+    <h1>Login</h1>
+    <hr />
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Login</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    const password_input = document.getElementById("id_password");
+    const username_input = document.getElementById("id_username");
+
+    function styleElements() {
+        password_input.classList.add("form-control");
+        username_input.classList.add("form-control");
+    }
+
+    styleElements();
+</script>
+{% endblock js %}
