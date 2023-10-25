@@ -48,3 +48,27 @@ def ArticleCreateView(request, *args, **kwargs):
     }
 
     return render(request, template, context)
+
+
+@superuseronly
+def ArticleUpdateView(request, id_, *args, **kwargs):
+    template = "article_update.html"
+    qs = Post.objects.filter(id=id_)
+
+    if not qs:
+        return redirect('/all/')
+
+    obj = qs.first()
+    if not obj.author == request.user:
+        return redirect('/all/')
+    form = PostCreateForm(instance=obj)
+    if request.method == "POST":
+        form = PostCreateForm(request.POST, instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect(f'/articles/view/{obj.slug}/')
+    context = {
+        'form' : form,
+    }
+
+    return render(request, template, context)

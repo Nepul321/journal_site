@@ -20,6 +20,13 @@
     <p>{{ obj.content|safe }}</p>
 </div>
 <div class="container">
+    {% if user.is_superuser %}
+     {% if obj.author == user %}
+    <a href="{% url 'article-update' obj.id %}" class="btn btn-secondary">Update</a>
+     {% endif %}
+    {% endif %}
+</div>
+<div class="container my-4">
     <h2>Bibiliography</h2>
     <hr />
     <p>{{ obj.citations|safe }}</p>
