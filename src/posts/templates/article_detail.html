@@ -20,8 +20,8 @@
     <p>{{ obj.content|safe }}</p>
 </div>
 <div class="container">
-    {% if user.is_superuser %}
-     {% if obj.author == user %}
+    {% if user.is_author or user.is_superuser %}
+     {% if obj.author == user or user.is_superuser %}
     <a href="{% url 'article-update' obj.id %}" class="btn btn-secondary">Update</a>
      {% endif %}
     {% endif %}

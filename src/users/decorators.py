@@ -1,12 +1,12 @@
 from django.shortcuts import redirect
 
 
-def superuseronly(view):
+def verifieduseronly(view):
     def wrapper_function(request, *args, **kwargs):
-        if not request.user.is_superuser:
-            return redirect('/')
-        else:
+        if request.user.is_superuser or request.user.is_author:
             return view(request, *args, **kwargs)
+        else:
+            return redirect('/')
 
     return wrapper_function
 

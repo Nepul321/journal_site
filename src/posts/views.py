@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Post
-from users.decorators import superuseronly
+from users.decorators import verifieduseronly
 from .forms import PostCreateForm
 from django.core.paginator import Paginator
 
@@ -33,7 +33,7 @@ def ArticleDetails(request, slug, *args, **kwargs):
 
     return render(request, template, context)
 
-@superuseronly
+@verifieduseronly
 def ArticleCreateView(request, *args, **kwargs):
     template = "article_create.html"
     form = PostCreateForm()
@@ -50,7 +50,7 @@ def ArticleCreateView(request, *args, **kwargs):
     return render(request, template, context)
 
 
-@superuseronly
+@verifieduseronly
 def ArticleUpdateView(request, id_, *args, **kwargs):
     template = "article_update.html"
     qs = Post.objects.filter(id=id_)
@@ -59,8 +59,10 @@ def ArticleUpdateView(request, id_, *args, **kwargs):
         return redirect('/all/')
 
     obj = qs.first()
-    if not obj.author == request.user:
-        return redirect('/all/')
+    if not request.user.is_superuser:
+        if not obj.author == request.user:
+            return redirect('/all/')
+        
     form = PostCreateForm(instance=obj)
     if request.method == "POST":
         form = PostCreateForm(request.POST, instance=obj)

@@ -12,7 +12,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'all' %}">All articles</a>
           </li>
-          {% if user.is_superuser %}
+          {% if user.is_superuser or user.is_author %}
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'article-create' %}">Write Article</a>
           </li>
