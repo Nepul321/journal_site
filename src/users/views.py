@@ -9,6 +9,9 @@ from django.contrib.auth.forms import (
     AuthenticationForm,
 )
 
+from .forms import AccountForm
+
+
 from .decorators import unauthenticated_user
 
 @unauthenticated_user
@@ -30,3 +33,19 @@ def LoginView(request, *args, **kwargs):
 def LogoutView(request, *args, **kwargs):
     logout(request)
     return redirect('login-view')
+
+
+@login_required
+def UpdateAccountView(request, *args, **kwargs):
+    template = "account_update.html"
+    form = AccountForm(instance=request.user)
+    if request.method == "POST":
+        form = AccountForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account-view')
+    context = {
+     'form' : form,
+    }
+
+    return render(request, template, context)
