@@ -21,5 +21,8 @@ Account
 {% endblock content %}
 
 {% block js %}
-
+<script>
+    const helptext = document.querySelectorAll(".helptext");
+    helptext[1].innerHTML = "Click <a href='/accounts/password/'>here</a> to change your password"
+</script>
 {% endblock js %}
