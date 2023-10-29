@@ -7,3 +7,4 @@ Include/
 db.sqlite3
 credentials.txt
 static/
+.vscode/
