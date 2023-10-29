@@ -13,14 +13,12 @@ class AccountForm(UserChangeForm):
         model = User
         fields = (
            'username',
-           'first_name',
-           'last_name',
+           'name',
            'email'
         )
 
         widgets = {
             'username' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'first_name' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'last_name' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'name' : forms.TextInput(attrs={'class' : 'form-control'}),
             'email' : forms.EmailInput(attrs= {'class' : 'form-control'})
         }

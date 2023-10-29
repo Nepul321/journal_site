@@ -31,7 +31,7 @@ Free Thought - All articles
           />
           <div class="card-body">
             <h5 class="card-title">{{ i.title }}</h5>
-            <p>By {{ i.author.get_full_name }}</p>
+            <p>By {{ i.author.name }}</p>
             <a href="{% url 'article-detail' i.slug %}" class="btn btn-outline-primary"
               ><i class="fas fa-link"></i> View article</a
             >
