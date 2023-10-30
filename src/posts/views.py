@@ -38,9 +38,9 @@ def ArticleCreateView(request, *args, **kwargs):
     template = "article_create.html"
     form = PostCreateForm()
     if request.method == "POST":
-        form = PostCreateForm(request.POST)
+        form = PostCreateForm(request.POST, request.FILES)
+        form.instance.author = request.user
         if form.is_valid():
-            form.instance.author = request.user
             form.save()
             return redirect('/all/')
     context = {
@@ -65,7 +65,7 @@ def ArticleUpdateView(request, id_, *args, **kwargs):
         
     form = PostCreateForm(instance=obj)
     if request.method == "POST":
-        form = PostCreateForm(request.POST, instance=obj)
+        form = PostCreateForm(request.POST, request.FILES, instance=obj)
         if form.is_valid():
             form.save()
             return redirect(f'/articles/view/{obj.slug}/')

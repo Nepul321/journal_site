@@ -8,7 +8,7 @@ class PostCreateForm(forms.ModelForm):
 
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'image_url' : forms.URLInput(attrs={'class' : 'form-control'}),
+            'image_url' : forms.FileInput(attrs={'class' : 'form-control'}),
             'content' : forms.Textarea(attrs={'class' : 'form-control'}),
             'citations' : forms.Textarea(attrs={'class' : 'form-control'}),
         }

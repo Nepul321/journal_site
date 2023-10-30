@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.crypto import get_random_string
 from users.models import CustomUser
 
@@ -13,13 +14,13 @@ def unique_slugify(instance, slug):
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    image_url = models.URLField(default="")
+    image_url = models.ImageField(upload_to="media/blog-posts/header-images/%Y/%m/%d/%H/%M")
     slug = models.SlugField(unique=True, blank=True)
     date = models.DateField(auto_now_add=True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
-    content = models.TextField(blank=False)
-    citations = models.TextField(blank=True)
+    content = RichTextUploadingField()
+    citations = RichTextUploadingField()
 
     class Meta:
         ordering = ['-datetime', ]

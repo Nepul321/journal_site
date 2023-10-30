@@ -44,11 +44,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'ckeditor',
+    "ckeditor_uploader",
     'rest_framework',
     'base',
     'posts',
     'users',
 ]
+
+CKEDITOR_CONFIGS = {
+  'default': {
+      'toolbar': 'full',
+      'width' : '100%',
+      'height' : 'auto',
+      'extraPlugins': ','.join(
+          [
+              'codesnippet',
+          ]
+
+      ),
+  },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -172,6 +188,9 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "users.CustomUser"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

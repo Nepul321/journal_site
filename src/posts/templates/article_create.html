@@ -12,9 +12,10 @@ Create Article
 <div class="container-fluid my-4">
 <h1>Write a new article</h1>
 <hr />
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
+    {{ form.media }}
     <button class="btn btn-outline-primary">Publish</button>
 </form>
 </div>
