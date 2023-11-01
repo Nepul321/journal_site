@@ -20,6 +20,7 @@ class Post(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     datetime = models.DateTimeField(auto_now_add=True)
     content = RichTextUploadingField()
+    likes = models.ManyToManyField(CustomUser, related_name="article_likes", blank=True)
     citations = RichTextUploadingField()
 
     class Meta:
