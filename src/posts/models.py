@@ -21,7 +21,7 @@ class Post(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     content = RichTextUploadingField()
     likes = models.ManyToManyField(CustomUser, related_name="article_likes", blank=True)
-    citations = RichTextUploadingField()
+    citations = RichTextUploadingField(blank=True)
 
     class Meta:
         ordering = ['-datetime', ]

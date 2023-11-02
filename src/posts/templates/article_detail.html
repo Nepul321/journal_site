@@ -32,11 +32,13 @@
 
     {% endif %}
 </div>
+{% if obj.citations %}
 <div class="container my-4">
     <h2>Bibiliography</h2>
     <hr />
     <p>{{ obj.citations|safe }}</p>
 </div>
+{% endif %}
 </div>
 {% endblock content %}
 
