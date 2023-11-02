@@ -12,6 +12,9 @@
 <div class="container-fluid my-4">
 <div class="container">
     <h1>{{ obj.title }}</h1>
+    {% if obj.description %}
+    <p style="font-style: italic; size: 20px;">{{ obj.description }}</p>
+    {% endif %}
     <img src="{{ obj.image_url.url }}" style="width: 80%;" />
     <p style="font-size: 20px;" class="my-3">By {{ obj.author.name }}</p>
 </div>

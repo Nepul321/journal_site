@@ -31,6 +31,9 @@ Free Thought - All articles
           />
           <div class="card-body">
             <h5 class="card-title">{{ i.title }}</h5>
+            {% if i.description %}
+            <p style="font-style: italic; size: 20px;">{{ i.description }}</p>
+            {% endif %}
             <p>By {{ i.author.name }}</p>
             <a href="{% url 'article-detail' i.slug %}" class="btn btn-outline-primary"
               ><i class="fas fa-link"></i> View article</a

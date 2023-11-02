@@ -14,6 +14,7 @@ def unique_slugify(instance, slug):
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
     image_url = models.ImageField(upload_to="media/blog-posts/header-images/%Y/%m/%d/%H/%M")
     slug = models.SlugField(unique=True, blank=True)
     date = models.DateField(auto_now_add=True)
