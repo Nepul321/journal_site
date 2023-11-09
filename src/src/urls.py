@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('users.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('api/posts/', include('posts.api.urls')),
 ]
