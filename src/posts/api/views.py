@@ -17,22 +17,22 @@ from rest_framework.response import Response
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def post_like_unlike_view(request):
+    user = request.user
     context = {"request" : request}
     serializer = PostActionSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         data = serializer.validated_data
         id = data.get("id")
-        action = data.get("action")
         qs = Post.objects.filter(id=id)
         if not qs.exists():
             return Response({}, status=404)
 
         obj = qs.first()
-        if action == "like":
+        if not user in obj.likes.all():
             obj.likes.add(request.user)
             serializer = PostSerializer(obj, context=context)
             return Response(serializer.data, status=200)
-        elif action == "unlike":
+        else:
             obj.likes.remove(request.user)
             serializer = PostSerializer(obj, context=context)
             return Response(serializer.data, status=200)

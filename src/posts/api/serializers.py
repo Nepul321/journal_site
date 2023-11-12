@@ -2,16 +2,9 @@ from rest_framework import serializers
 from ..models import Post
 from users.api.serializers import UserPublicSerializer
 
-POST_VALIDATE = ['like', 'unlike']
 
 class PostActionSerializer(serializers.Serializer):
     id = serializers.CharField()
-    action = serializers.CharField()
-    def validate_action(self, value):
-        value = value.lower().strip()
-        if value not in POST_VALIDATE:
-            raise serializers.ValidationError("This is not a valid action")
-        return value    
         
 class PostSerializer(serializers.ModelSerializer):
     likes = serializers.SerializerMethodField(read_only=True)
