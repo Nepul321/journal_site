@@ -12,11 +12,17 @@ from rest_framework.permissions import (
 )
 from rest_framework.response import Response
 
-
+@api_view(['GET'])
+def posts_view(request, *args, **kwargs):
+    context = {"request" : request}
+    qs = Post.objects.all()
+    serializer = PostSerializer(qs, many=True, context=context)
+    data = serializer.data
+    return Response(data, 200)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def post_like_unlike_view(request):
+def post_like_unlike_view(request, *args, **kwargs):
     user = request.user
     context = {"request" : request}
     serializer = PostActionSerializer(data=request.data)
