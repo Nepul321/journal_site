@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.crypto import get_random_string
 from users.models import CustomUser
+from comments.models import Comment
 
 def unique_slugify(instance, slug):
     model = instance.__class__
@@ -23,6 +24,7 @@ class Post(models.Model):
     content = RichTextUploadingField()
     likes = models.ManyToManyField(CustomUser, related_name="article_likes", blank=True)
     citations = RichTextUploadingField(blank=True)
+    comments = models.ManyToManyField(Comment, related_name="article_comments", blank=True)
 
     class Meta:
         ordering = ['-datetime', ]
