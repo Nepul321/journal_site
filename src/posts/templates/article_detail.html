@@ -44,6 +44,10 @@
     <p>{{ obj.citations|safe }}</p>
 </div>
 {% endif %}
+<div class="container my-4">
+    <h1>Comments ({{ obj.comments.count }})</h1>
+    <hr />
+</div>
 </div>
 {% endblock content %}
 
