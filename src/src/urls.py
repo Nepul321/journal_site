@@ -10,4 +10,5 @@ urlpatterns = [
     path('', include('users.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('api/posts/', include('posts.api.urls')),
+    path('api/comments/', include('comments.api.urls')),
 ]
