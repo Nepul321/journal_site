@@ -3,6 +3,7 @@ from .models import Post
 from users.decorators import verifieduseronly
 from .forms import PostCreateForm
 from django.core.paginator import Paginator
+from comments.forms import CommentForm
 
 def AllArticles(request, *args, **kwargs):
     template = "global.html"
@@ -22,6 +23,7 @@ def AllArticles(request, *args, **kwargs):
 def ArticleDetails(request, slug, *args, **kwargs):
     template = "article_detail.html"
     qs = Post.objects.filter(slug=slug)
+    form = CommentForm()
 
     if not qs:
         return redirect('/all/')
@@ -29,6 +31,7 @@ def ArticleDetails(request, slug, *args, **kwargs):
     obj = qs.first()
     context = {
       'obj' : obj,
+      'form' : form,
     }
 
     return render(request, template, context)

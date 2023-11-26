@@ -47,6 +47,13 @@
 <div class="container my-4">
     <h1>Comments (<span id="commentCount" data-count="{{ comments.count }}">{{ obj.comments.count }}</span>)</h1>
     <hr />
+    {% if user.is_authenticated %}
+    <form id="form" class="my-3">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <button class="btn btn-primary">Comment</button>
+    </form>
+     {% endif %}
     {% for comment in obj.comments.all %}
     
     <div class="card mb-3">
