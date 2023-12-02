@@ -14,11 +14,12 @@ class AccountForm(UserChangeForm):
         fields = (
            'username',
            'name',
-           'email'
+           'email',
+           'profile_pic'
         )
 
         widgets = {
             'username' : forms.TextInput(attrs={'class' : 'form-control'}),
             'name' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'email' : forms.EmailInput(attrs= {'class' : 'form-control'})
+            'email' : forms.EmailInput(attrs= {'class' : 'form-control'}),
         }

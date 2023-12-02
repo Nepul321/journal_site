@@ -42,7 +42,7 @@ def UpdateAccountView(request, *args, **kwargs):
     template = "account_update.html"
     form = AccountForm(instance=request.user)
     if request.method == "POST":
-        form = AccountForm(request.POST, instance=request.user)
+        form = AccountForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('account-view')
