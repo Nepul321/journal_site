@@ -11,7 +11,7 @@
 {% endblock css %}
 
 {% block content %}
-<div class="container-fluid my-4">
+<div class="container-fluid my-4" id="main">
 <div class="container">
     <h1>{{ obj.title }}</h1>
     {% if obj.description %}
@@ -45,7 +45,7 @@
 </div>
 {% endif %}
 <div class="container my-4">
-    <h1>Comments (<span id="commentCount" data-count="{{ obj.comments.count }}">{{ obj.comments.count }}</span>)</h1>
+    <h1>Comments (<span id="commentCount" data-count="{{ obj.comments.count }}">{{ obj.comments.count }}</span>) <button id="show_hide" class="btn btn-outline-dark">Hide Comments</button></button></h1>
     <hr />
     {% if user.is_authenticated %}
     <form id="form" class="my-3">
@@ -54,44 +54,43 @@
      <button class="btn btn-primary">Comment</button>
     </form>
      {% endif %}
-     <div id="comments">
-      {% for comment in obj.comments.all %}
-    
-      <div class="card mb-3">
-          <div class="card-body">
-            <div class="profile-badge">
-              {% if comment.user.profile_pic %}
-              <p>
-               <div class="profile_pic">
-                 <img src="{{ comment.user.profile_pic.url }}"
-                 style="height: 40px; width : 40px; border-radius: 50%;" 
-                 alt="" />
-               </div>
-                <a href="">{{ comment.user.username }}</a>
-                <small class="text-muted">{{ comment.date }}</small>
-              </p>
-              {% else %}
-              <p>
-               <div style="width: 40px; 
-               background-color: grey; color: white; height: 40px; 
-               border-radius: 50%; text-align: center; justify-content: center; 
-               align-items: center; display: flex;">
-                    {{ comment.user.username|slice:"1" }}
-               </div>
-               <a href="">{{ comment.user.username }}</a>
-               <small class="text-muted">{{ comment.date }}</small>
-              </p>
-              {% endif %}
-            </div>
-            <p>{{ comment.content|safe }}</p>
-            <div class="btn-group">
-              <a href="" class="btn btn-outline-primary">View Comment/Replies</a>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-     </div>
 </div>
+<div id="comments" class="container">
+  {% for comment in obj.comments.all %}
+  <div class="card mb-3">
+      <div class="card-body">
+        <div class="profile-badge">
+          {% if comment.user.profile_pic %}
+          <p>
+           <div class="profile_pic">
+             <img src="{{ comment.user.profile_pic.url }}"
+             style="height: 40px; width : 40px; border-radius: 50%;" 
+             alt="" />
+           </div>
+            <a href="">{{ comment.user.username }}</a>
+            <small class="text-muted">{{ comment.date }}</small>
+          </p>
+          {% else %}
+          <p>
+           <div style="width: 40px; 
+           background-color: grey; color: white; height: 40px; 
+           border-radius: 50%; text-align: center; justify-content: center; 
+           align-items: center; display: flex;">
+                {{ comment.user.username|slice:"1" }}
+           </div>
+           <a href="">{{ comment.user.username }}</a>
+           <small class="text-muted">{{ comment.date }}</small>
+          </p>
+          {% endif %}
+        </div>
+        <p>{{ comment.content|safe }}</p>
+        <div class="btn-group">
+          <a href="" class="btn btn-outline-primary">View Comment/Replies</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+ </div>
 </div>
 {% endblock content %}
 
