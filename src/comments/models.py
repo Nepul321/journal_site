@@ -10,8 +10,8 @@ class Comment(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey("self", blank=True, null=True, on_delete=models.CASCADE)
 
-    # class Meta:
-    #     ordering = ['-datetime', ]
+    class Meta:
+        ordering = ['-datetime', ]
 
     @property
     def is_child(self):
