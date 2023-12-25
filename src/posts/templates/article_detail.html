@@ -85,7 +85,7 @@
         </div>
         <p>{{ comment.content|safe }}</p>
         <div class="btn-group">
-          <a href="" class="btn btn-outline-primary">View Comment/Replies</a>
+          <a href="{% url 'comment_replies' comment.id %}" class="btn btn-outline-primary">View Comment/Replies</a>
         </div>
       </div>
     </div>
