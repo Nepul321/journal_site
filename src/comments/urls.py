@@ -6,6 +6,6 @@ from .views import (
 
 urlpatterns = [
 
- path('comments/<int:id>/', CommentReplies, name="comment_replies")
+ path('comments/<int:id_>/', CommentReplies, name="comment_replies")
 
 ]

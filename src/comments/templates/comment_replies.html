@@ -5,8 +5,39 @@ Replies
 {% endblock title %}
 
 {% block content %}
-<div class="container-fluid">
-	
+<div class="container-fluid my-4">
+	  <div class="card mb-3">
+      <div class="card-body">
+        <div class="profile-badge">
+          {% if comment.user.profile_pic %}
+          <p>
+           <div class="profile_pic">
+             <img src="{{ comment.user.profile_pic.url }}"
+             style="height: 40px; width : 40px; border-radius: 50%;" 
+             alt="" />
+           </div>
+            <a href="">{{ comment.user.username }}</a>
+            <small class="text-muted">{{ comment.date }}</small>
+          </p>
+          {% else %}
+          <p>
+           <div style="width: 40px; 
+           background-color: grey; color: white; height: 40px; 
+           border-radius: 50%; text-align: center; justify-content: center; 
+           align-items: center; display: flex;">
+                {{ comment.user.username|slice:"1" }}
+           </div>
+           <a href="">{{ comment.user.username }}</a>
+           <small class="text-muted">{{ comment.date }}</small>
+          </p>
+          {% endif %}
+        </div>
+        <p>{{ comment.content|safe }}</p>
+        <div class="btn-group">
+          <a href="" class="btn btn-outline-primary">Back to article</a>
+        </div>
+      </div>
+    </div>
 </div>
 {% endblock content %}
 
