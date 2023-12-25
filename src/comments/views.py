@@ -13,9 +13,11 @@ def CommentReplies(request, id_, *args, **kwargs):
 	for i in qs_2:
 		if obj in i.comments.all():
 			answer = i
+	replies = obj.get_children()
 	context = {
      'comment' : obj,
      'post' : answer,
+     'replies' : replies,
 	}
 
 	return render(request, template, context)
