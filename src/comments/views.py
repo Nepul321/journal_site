@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Comment
 from posts.models import Post
+from .forms import CommentForm
 
 # Create your views here.
 
@@ -14,10 +15,12 @@ def CommentReplies(request, id_, *args, **kwargs):
 		if obj in i.comments.all():
 			answer = i
 	replies = obj.get_children()
+	form = CommentForm()
 	context = {
      'comment' : obj,
      'post' : answer,
      'replies' : replies,
+     'form' : form,
 	}
 
 	return render(request, template, context)
