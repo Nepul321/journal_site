@@ -7,7 +7,7 @@ Replies
 {% endblock title %}
 
 {% block content %}
-<div class="container-fluid my-4">
+<div class="container-fluid my-4" id="main" data-comment="{{ comment.id }}">
 	  <div class="card mb-3">
       <div class="card-body">
         <div class="profile-badge">
@@ -40,6 +40,8 @@ Replies
         </div>
       </div>
     </div>
+    <h1>Replies (<span id="reply_count"data-count="{{ replies.count }}">{{ replies.count }}</span>)</h1>
+    <hr />
     {% if user.is_authenticated %}
     <form id="form">
       {{ form.as_p }}
@@ -85,87 +87,5 @@ Replies
 
 {% block js %}
 
-<script>
-
-const replies = document.getElementById("replies")
-
-function getCookie(name) {
-  var cookieValue = null;
-  if (document.cookie && document.cookie !== "") {
-    var cookies = document.cookie.split(";");
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === name + "=") {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
-
-function insertReply(data) {
-    const element = document.createElement("div")
-    const card = document.createElement("div")
-    card.className = "card mb-3"
-    card.innerHTML = `
-    <div class="card-body">
-     <div class="profile-badge">
-     <p>
-             <div style="width: 40px; 
-             background-color: grey; color: white; height: 40px; 
-             border-radius: 50%; text-align: center; justify-content: center; 
-             align-items: center; display: flex;">
-                  ${data.user.username[0]}
-             </div>
-             <a href="">${data.user.username}</a>
-             <small class="text-muted">${data.date}</small>
-            </p>
-     </div>
-     <p>${data.content}</p>
-    </div>
-    `
-
-    element.appendChild(card)
-    replies.innerHTML = element.innerHTML + replies.innerHTML
-
-}
-
-const form = document.getElementById('form');
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = {
-        content : e.target[0].value
-    }
-
-    const csrftoken = getCookie('csrftoken')
-    fetch(`/api/comments/{{ comment.id }}/create/`, {
-      method : "POST",
-      headers : {'Content-Type' : 'application/json' , 'X-CSRFToken': csrftoken},
-      body : JSON.stringify(data)
-    })
-
-    .then((res) => {
-        if(res.status === 201) {
-            return res.json();
-        } else if(res.status === 403) {
-            alert("You can't comment, Try Logging In")
-        } else if(res.status === 404) {
-            alert("Post not found")
-        } else {
-            alert("Please try again")
-        }
-        return {}
-      })
-    
-      .then((data) => {
-        insertReply(data);
-      })
-
-      console.log(data);
-      form.reset();
-})  
-
-</script>
+<script src="{% static '/js/replies.js' %}"></script>
 {% endblock js %}
