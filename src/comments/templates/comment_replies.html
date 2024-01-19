@@ -37,6 +37,9 @@ Replies
         <p>{{ comment.content|safe }}</p>
         <div class="btn-group">
           <a href="{% url 'article-detail' post.slug %}" class="btn btn-outline-primary">Back to article</a>
+          {% if user == comment.user %}
+          <button class="btn btn-danger" id="comment-delete" data-id="{{ comment.id }}" data-post="{{ post.slug }}">Delete</button>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -51,7 +54,7 @@ Replies
     {% endif %}
     <div class="container-fluid my-3" id="replies">
     	{% for comment in replies %}
-	  <div class="card mb-3">
+	  <div class="card mb-3" id="reply-card-{{ comment.id }}">
       <div class="card-body">
         <div class="profile-badge">
           {% if comment.user.profile_pic %}
@@ -78,6 +81,11 @@ Replies
           {% endif %}
         </div>
         <p>{{ comment.content|safe }}</p>
+        <div class="btn-group">
+          {% if user == comment.user %}
+          <button class="btn btn-danger" id="reply-delete" data-id="{{ comment.id }}">Delete</button>
+          {% endif %}
+        </div>
       </div>
     </div>
     	{% endfor %}

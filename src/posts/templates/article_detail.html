@@ -57,7 +57,7 @@
 </div>
 <div id="comments" class="container">
   {% for comment in obj.comments.all %}
-  <div class="card mb-3">
+  <div class="card mb-3" id="comment-card-{{ comment.id }}">
       <div class="card-body">
         <div class="profile-badge">
           {% if comment.user.profile_pic %}
@@ -86,6 +86,9 @@
         <p>{{ comment.content|safe }}</p>
         <div class="btn-group">
           <a href="{% url 'comment_replies' comment.id %}" class="btn btn-outline-primary">View Comment/Replies</a>
+          {% if user == comment.user %}
+          <button class="btn btn-danger" id="comment-delete" data-id="{{ comment.id }}">Delete</button>
+          {% endif %}
         </div>
       </div>
     </div>
