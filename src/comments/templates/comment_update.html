@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Comment
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid my-4">
+	<h1>Update Comment</h1>
+	<hr />
+<form action="" method="POST">
+
+ {% csrf_token %}
+ {{ form.as_p }}
+
+ <button class="btn btn-primary">Submit</button>
+
+</form>
+
+<a href="{% url 'comment_replies' obj.id %}" class="btn btn-outline-secondary my-4">Back to thread</a>
+</div>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

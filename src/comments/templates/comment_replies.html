@@ -38,7 +38,8 @@ Replies
         <div class="btn-group">
           <a href="{% url 'article-detail' post.slug %}" class="btn btn-outline-primary">Back to article</a>
           {% if user == comment.user %}
-          <button class="btn btn-danger" id="comment-delete" data-id="{{ comment.id }}" data-post="{{ post.slug }}">Delete</button>
+          <a href="{% url 'comment_update' comment.id %}" class="btn btn-secondary">Update</a>
+          <button class="btn btn-outline-danger" id="comment-delete" data-id="{{ comment.id }}" data-post="{{ post.slug }}">Delete</button>
           {% endif %}
         </div>
       </div>
